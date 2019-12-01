@@ -1,0 +1,17 @@
+server:
+  port: 443
+#  开启https服务
+  ssl:
+    #    秘钥位置
+    key-store: classpath:keystore.p12
+    #    秘钥密码
+    key-store-password: zz941025
+    key-store-type: PKCS12
+    key-alias: tomcat
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/laundry?serverTimezone=UTC&characterEncoding=utf-8
+    username: root
+    password: admin
+hello:
+  world: prod

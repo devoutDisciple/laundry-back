@@ -1,0 +1,29 @@
+server:
+  port: 8888
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/laundry?serverTimezone=UTC&characterEncoding=utf-8
+    username: root
+    password: admin
+  mail:
+    default-encoding: utf-8
+    host: smtp.qq.com
+    username: 1094705507@qq.com
+    #    刚才开启服务的弹出的密码， 其余的都是固定的
+    password: nygtmvnthllhgjdh
+    port: 465
+    properties:
+      mail:
+        smtp:
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+      debug: true
+hello:
+  world: dev
+logging:
+  file: my.log
+  pattern:
+    file: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %msg%n)"
+    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level %msg%n"
+  level:
+    root: info
