@@ -23,17 +23,19 @@ public class DruidDatasourceConfig {
         return new DruidDataSource();
     }
 
+
     @Bean
     public ServletRegistrationBean statViewServlet() {
         ServletRegistrationBean bean = new ServletRegistrationBean(new StatViewServlet());
         Map<String, String> initParams = new HashMap<>();
         initParams.put("loginUsername", "admin");
         initParams.put("loginPassword", "123");
-        initParams.put("allow","127.0.0.1");
+        initParams.put("allow", "127.0.0.1");
         bean.setInitParameters(initParams);
         bean.setUrlMappings(Arrays.asList("/druid/*"));
         return bean;
     }
+
     @Bean
     public FilterRegistrationBean webStatFilter() {
         FilterRegistrationBean<WebStatFilter> bean = new FilterRegistrationBean<>(new WebStatFilter());
