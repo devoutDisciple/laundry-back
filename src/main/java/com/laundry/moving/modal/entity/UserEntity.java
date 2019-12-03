@@ -5,13 +5,16 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "user", schema = "laundry", catalog = "")
+@IdClass(UserEntityPK.class)
 public class UserEntity {
     private int id;
-    private String name;
+    private String username;
+    private String password;
+    private String phone;
     private Integer age;
     private Integer sex;
-    private String phone;
     private String adress;
+    private String token;
 
     @Id
     @Column(name = "id")
@@ -23,14 +26,34 @@ public class UserEntity {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "name")
-    public String getName() {
-        return name;
+    @Id
+    @Column(name = "username")
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Basic
+    @Column(name = "password")
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Basic
+    @Column(name = "phone")
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     @Basic
@@ -54,16 +77,6 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "phone")
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    @Basic
     @Column(name = "adress")
     public String getAdress() {
         return adress;
@@ -73,21 +86,33 @@ public class UserEntity {
         this.adress = adress;
     }
 
+    @Basic
+    @Column(name = "token")
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserEntity that = (UserEntity) o;
         return id == that.id &&
-                Objects.equals(name, that.name) &&
+                Objects.equals(username, that.username) &&
+                Objects.equals(password, that.password) &&
+                Objects.equals(phone, that.phone) &&
                 Objects.equals(age, that.age) &&
                 Objects.equals(sex, that.sex) &&
-                Objects.equals(phone, that.phone) &&
-                Objects.equals(adress, that.adress);
+                Objects.equals(adress, that.adress) &&
+                Objects.equals(token, that.token);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, age, sex, phone, adress);
+        return Objects.hash(id, username, password, phone, age, sex, adress, token);
     }
 }

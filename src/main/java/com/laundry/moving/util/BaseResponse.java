@@ -31,4 +31,10 @@ public class BaseResponse {
         BaseResponse baseResponse = new BaseResponse(false, 500, data);
         return baseResponse;
     }
+
+    public static BaseResponse toLogin() {
+        BaseResponse baseResponse = new BaseResponse(true, 502, "");
+        return baseResponse;
+    }
+
 }
