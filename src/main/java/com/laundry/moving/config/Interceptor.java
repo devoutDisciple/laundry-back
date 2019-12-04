@@ -1,16 +1,14 @@
 package com.laundry.moving.config;
 
+import com.laundry.moving.modal.entity.UserEntity;
 import com.laundry.moving.modal.repo.UserEntityRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Optional;
 
 @Component
 public class Interceptor implements HandlerInterceptor {
@@ -32,14 +30,15 @@ public class Interceptor implements HandlerInterceptor {
                     token = value;
                 }
             }
-            Optional optional  = userEntityRepo.findByToken(token);
+            UserEntity userEntity  = userEntityRepo.findByToken(token);
             System.out.println("optional");
-            if(optional != null) {
+            if(userEntity != null) {
                 flag = true;
             }
         }
         if(!flag) {
             response.sendRedirect("/toLogin");
+            return true;
         }
         System.out.println(">>>MyInterceptor1>>>>>>>在请求处理之前进行调用（Controller方法调用之前");
         return true;// 只有返回true才会继续向下执行，返回false取消当前请求

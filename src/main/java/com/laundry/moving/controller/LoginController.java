@@ -35,7 +35,7 @@ public class LoginController {
         return BaseResponse.success("该账号已经通过拦截器，成功访问");
     }
 
-    @GetMapping("/noLogin")
+    @GetMapping("/toLogin")
     public BaseResponse noLogin() {
         return BaseResponse.success("该账号没有登录");
     }
