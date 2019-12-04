@@ -27,7 +27,7 @@ public class LoginController {
 
     @GetMapping("/logout")
     public BaseResponse logout(HttpServletRequest request, HttpServletResponse response) {
-        return loginService.logout(request, response);
+        return loginService.logout(response);
     }
 
     @GetMapping("/zhangzhen")
@@ -38,6 +38,12 @@ public class LoginController {
     @GetMapping("/toLogin")
     public BaseResponse noLogin() {
         return BaseResponse.success("该账号没有登录");
+    }
+
+
+    @GetMapping("/andQuery")
+    public BaseResponse andQuery() {
+        return loginService.testAndQuery();
     }
 
 }

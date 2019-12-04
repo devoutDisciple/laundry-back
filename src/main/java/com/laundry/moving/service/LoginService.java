@@ -1,7 +1,9 @@
 package com.laundry.moving.service;
 
 import com.laundry.moving.modal.entity.UserEntity;
+import com.laundry.moving.modal.repo.HelloEntityRepo;
 import com.laundry.moving.modal.repo.UserEntityRepo;
+import com.laundry.moving.modal.vo.Test;
 import com.laundry.moving.modal.vo.User;
 import com.laundry.moving.util.BaseResponse;
 import com.laundry.moving.util.Util;
@@ -11,12 +13,16 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Service
 public class LoginService {
 
     @Autowired
     UserEntityRepo userEntityRepo;
+
+    @Autowired
+    HelloEntityRepo helloEntityRepo;
 
     public BaseResponse login(HttpServletRequest request, HttpServletResponse response, User user) {
         try {
@@ -41,12 +47,22 @@ public class LoginService {
     }
 
 
-    public BaseResponse logout(HttpServletRequest request, HttpServletResponse response) {
+    public BaseResponse logout(HttpServletResponse response) {
         try {
             Cookie cookie = new Cookie("token", "");
             cookie.setMaxAge(0);
             response.addCookie(cookie);
             return BaseResponse.success("退出成功");
+        } catch (Exception e) {
+            System.out.println(e);
+            return BaseResponse.error("网络异常，请稍后重试");
+        }
+    }
+
+    public BaseResponse testAndQuery() {
+        try {
+            List<Test> list = helloEntityRepo.queryHelloAndUser(1);
+            return BaseResponse.success(list);
         } catch (Exception e) {
             System.out.println(e);
             return BaseResponse.error("网络异常，请稍后重试");

@@ -28,8 +28,8 @@ public class DruidDatasourceConfig {
     public ServletRegistrationBean statViewServlet() {
         ServletRegistrationBean bean = new ServletRegistrationBean(new StatViewServlet());
         Map<String, String> initParams = new HashMap<>();
-        initParams.put("loginUsername", "admin");
-        initParams.put("loginPassword", "123");
+        initParams.put("loginUsername", "root");
+        initParams.put("loginPassword", "admin");
         initParams.put("allow", "127.0.0.1");
         bean.setInitParameters(initParams);
         bean.setUrlMappings(Arrays.asList("/druid/*"));
