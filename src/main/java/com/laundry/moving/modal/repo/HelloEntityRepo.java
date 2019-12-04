@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface HelloEntityRepo extends JpaRepository<HelloEntity, Integer> {
     @Query(nativeQuery = true, value = "select a.id as id, a.name as name, a.userId as userId, b.username as username from hello a, user b where a.id = ?1 and a.userId = b.id")
-    public List<Test> queryHelloAndUser(Integer id);
+    public List<Object[]> queryHelloAndUser(Integer id);
 }

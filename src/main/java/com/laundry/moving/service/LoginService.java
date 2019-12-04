@@ -6,6 +6,7 @@ import com.laundry.moving.modal.repo.UserEntityRepo;
 import com.laundry.moving.modal.vo.Test;
 import com.laundry.moving.modal.vo.User;
 import com.laundry.moving.util.BaseResponse;
+import com.laundry.moving.util.ModalMapping;
 import com.laundry.moving.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,7 +62,7 @@ public class LoginService {
 
     public BaseResponse testAndQuery() {
         try {
-            List<Test> list = helloEntityRepo.queryHelloAndUser(1);
+            List<Test> list = ModalMapping.mapping(helloEntityRepo.queryHelloAndUser(1), Test.class, new Test());
             return BaseResponse.success(list);
         } catch (Exception e) {
             System.out.println(e);
