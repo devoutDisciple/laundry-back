@@ -21,9 +21,6 @@ spring:
 hello:
   world: dev
 logging:
-  file: my.log
-  pattern:
-    file: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %msg%n)"
-    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level %msg%n"
-  level:
-    root: info
+  file:
+    # 设置日志文件路径
+    path: ./log

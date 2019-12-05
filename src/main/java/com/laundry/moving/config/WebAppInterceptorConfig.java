@@ -5,30 +5,29 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
-public class WebAppInterceptorConfig implements WebMvcConfigurer {
+public class WebAppInterceptorConfig extends WebMvcConfigurationSupport {
 
 
     @Autowired
-    private Interceptor Interceptor;
-
-//
-//    @Autowired
-//    public void setAuthInterceptor(Interceptor Interceptor) {
-//        this.Interceptor = Interceptor;
-//    }
+    private Interceptor interceptor;
 
     public void addInterceptors(InterceptorRegistry registry) {
-        InterceptorRegistration interceptorRegistration = registry.addInterceptor(Interceptor);
-        interceptorRegistration.addPathPatterns("/**/*");
+        InterceptorRegistration interceptorRegistration = registry.addInterceptor(interceptor);
+        interceptorRegistration.addPathPatterns("/**");
         interceptorRegistration.excludePathPatterns("/login");
         interceptorRegistration.excludePathPatterns("/logout");
         interceptorRegistration.excludePathPatterns("/toLogin");
+        interceptorRegistration.excludePathPatterns("/static/**");
         // 静态资源
         interceptorRegistration.excludePathPatterns("/js/**", "/css/**", "/images/**", "/lib/**",
                 "/fonts/**");
         // swagger-ui
         interceptorRegistration.excludePathPatterns("/swagger-resources/**", "/webjars/**",
                 "/v2/**", "/swagger-ui.html/**", "/swagger-ui.html#/**");
+    }
+
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("").setViewName("index");
     }
 
     /**
@@ -42,6 +41,7 @@ public class WebAppInterceptorConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
+        super.addResourceHandlers(registry);
     }
 
     public void addCorsMappings(CorsRegistry registry) {
